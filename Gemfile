@@ -80,6 +80,10 @@ gem 'aws-sdk-core', '~> 2.2.15'
 gem 'omniauth-37signals'          # BasecampAgent
 gem 'omniauth-wunderlist'
 
+# Strava
+gem 'omniauth-strava'
+gem 'strava-api-v3'
+
 # Bundler <1.5 does not recognize :x64_mingw as a valid platform name.
 # Unfortunately, it can't self-update because it errors when encountering :x64_mingw.
 unless Gem::Version.new(Bundler::VERSION) >= Gem::Version.new('1.5.0')

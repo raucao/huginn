@@ -274,6 +274,12 @@ Devise.setup do |config|
     end
   end
 
+  if defined?(OmniAuth::Strategies::Strava) &&
+     (key = ENV["STRAVA_OAUTH_KEY"]).present? &&
+     (secret = ENV["STRAVA_OAUTH_SECRET"]).present?
+    config.omniauth :strava, key, secret, scope: 'public'
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
