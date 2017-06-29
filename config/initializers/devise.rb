@@ -277,7 +277,7 @@ Devise.setup do |config|
   if defined?(OmniAuth::Strategies::Strava) &&
      (key = ENV["STRAVA_OAUTH_KEY"]).present? &&
      (secret = ENV["STRAVA_OAUTH_SECRET"]).present?
-    config.omniauth :strava, key, secret, scope: 'public'
+    config.omniauth :strava, key, secret, scope: 'view_private'
   end
 
   # ==> Warden configuration

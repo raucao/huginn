@@ -20,16 +20,16 @@ module Agents
     end
 
     def check
-      query_options = {}
+      query_options = { per_page: 200 }
       query_options[:after] = search_after if search_after
 
       activities = strava.list_athlete_activities(query_options)
 
       activities.sort!{ |a,b| a["id"] <=> b["id"] }
 
-      Rails.logger.info("================ OHAI =================")
-      Rails.logger.info(activities.size)
-      Rails.logger.info("================ /OHAI ================")
+      unless include_private_activities?
+        activities.reject!{ |a| a["private"] }
+      end
 
       activities.each do |activity|
         id = activity["id"].to_s
@@ -49,8 +49,18 @@ module Agents
 
     private
 
+    def include_private_activities?
+      # It's not possible to set proper boolean values in the config UI tree view
+      options['include_private_activities'] &&
+      options['include_private_activities'] != "false"
+    end
+
     def known_activities
-      memory['known_activities'].split(",")
+      if memory['known_activities']
+        memory['known_activities'].split(",")
+      else
+        Array.new
+      end
     end
 
     def last_seen
