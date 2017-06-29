@@ -5,8 +5,12 @@ module Agents
     cannot_receive_events!
 
     description <<-MD
-      The Strava Activities agent reads public activities from your
-      Strava account and creates events for new ones.
+      The Strava Activities agent reads activities from your Strava account
+      and creates events for new ones.
+
+      By default, it will only create events for public activities. You can
+      include private activities by setting `include_private_activities` to
+      `true`.
     MD
 
     default_schedule "every_1h"
