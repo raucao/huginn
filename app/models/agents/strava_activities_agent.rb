@@ -27,10 +27,9 @@ module Agents
       memory['last_known_activity'] || 0
     end
 
-    # def last_seen=(activity_id)
-    #   memory['last_known_activity'] = activity_id
-    #   Rails.logger.info "Updated last seen: #{activity_id}"
-    # end
+    def last_seen=(activity_id)
+      self.memory['last_known_activity'] = activity_id
+    end
 
     def check
       activities = strava.list_athlete_activities
@@ -44,9 +43,8 @@ module Agents
         if last_seen < id
           activity_details = strava.retrieve_an_activity(id)
           event = create_event payload: { activity: activity_details }
+          self.last_seen = id
           log "New Strava activity: https://www.strava.com/activities/#{id}", outbound_event: event
-          # last_seen = id
-          memory['last_known_activity'] = id
         end
       end
     end
