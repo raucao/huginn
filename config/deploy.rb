@@ -47,7 +47,7 @@ namespace :deploy do
   after :publishing, :restart do
     on roles(:all) do
       within release_path do
-        execute :rake, 'production:restart'
+        execute :rake, 'production:export'
       end
     end
   end
