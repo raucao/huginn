@@ -72,8 +72,9 @@ module Agents
     end
 
     def discover_webmention_endpoint(links, doc)
-      if url = links.by_rel('http://webmention.org/').target.to_s
-         url = (doc.at_css("link[rel=webmention]") || doc.at_css("a[rel=webmention]"))
+      if url = links.by_rel('http://webmention.org/').target.to_s or
+         url = doc.at_css("link[rel=webmention]").attributes["href"].value or
+         url = doc.at_css("a[rel=webmention]")
         return url
       else
         throw "No webmention endpoint found on website #{options[:website]}"
