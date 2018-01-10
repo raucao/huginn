@@ -71,6 +71,15 @@ GIT
       simple_oauth (~> 0.3.0)
 
 GIT
+  remote: https://github.com/tootsuite/mastodon-api
+  revision: 948610867da933c0b3a681562cca01b483b8e876
+  specs:
+    mastodon-api (1.1.0)
+      addressable (~> 2.4)
+      buftok
+      http (~> 2.0)
+
+GIT
   remote: https://github.com/tumblr/tumblr_client.git
   revision: 0c59b04e49f2a8c89860613b18cf4e8f978d8dc7
   ref: 0c59b04e49f2a8c89860613b18cf4e8f978d8dc7
@@ -666,6 +675,7 @@ DEPENDENCIES
   liquid (~> 4.0)
   listen (~> 3.0.5)
   loofah (~> 2.0)
+  mastodon-api!
   mini_magick
   mqtt
   multi_xml
@@ -721,7 +731,7 @@ DEPENDENCIES
   xmpp4r (~> 0.5.6)
 
 RUBY VERSION
-   ruby 2.3.4p301
+   ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
