@@ -18,8 +18,7 @@ module Agents
     MD
 
     def working?
-      true
-      # event_created_within?(interpolated['expected_update_period_in_days']) && !recent_error_logs?
+      !recent_error_logs?
     end
 
     def default_options
@@ -48,6 +47,8 @@ module Agents
       # log "webmention endpoint: " + webmention_endpoint
 
       incoming_events.each do |event|
+        next unless event.payload["status"].present?
+
         if target_url = discover_target_url(doc, event)
           log "Webmention endpoint: #{webmention_endpoint}, target URL: #{target_url}"
           create_event payload: event.payload.merge({
@@ -82,6 +83,7 @@ module Agents
     end
 
     def discover_target_url(doc, event)
+      # TODO remove and use source_url from config
       mastodon_post_url = event.payload["status"]["url"]
 
       return nil unless entries = doc.css('.h-entry')
