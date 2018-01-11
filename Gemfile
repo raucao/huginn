@@ -145,7 +145,7 @@ group :development do
   gem 'letter_opener_web', '~> 1.3.1'
   gem 'web-console', '>= 3.3.0'
 
-  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano', '3.4.1'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-bundler', '~> 1.1.4'
 
