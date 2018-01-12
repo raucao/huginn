@@ -1,4 +1,5 @@
 require 'dotenv'
+require 'sshkit/sudo'
 Dotenv.load
 
 # config valid only for current version of Capistrano
@@ -47,7 +48,7 @@ namespace :deploy do
   after :publishing, :restart do
     on roles(:all) do
       within release_path do
-        execute :rake, 'production:export'
+        sudo :rake, 'production:export'
       end
     end
   end
