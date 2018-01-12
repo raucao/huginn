@@ -48,7 +48,7 @@ namespace :deploy do
   after :publishing, :restart do
     on roles(:all) do
       within release_path do
-        sudo :rake, 'production:export'
+        sudo :bundle, :exec, :rake, 'production:export'
       end
     end
   end
